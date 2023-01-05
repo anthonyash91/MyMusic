@@ -1,32 +1,28 @@
-// import './App.css';
-import MainPage from '../MainPage/MainPage';
-import AuthPage from '../AuthPage/AuthPage'
-import { useState, useEffect } from 'react';
-import { getUser } from '../../utilities/users-service';
-
+import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-// import { diffIndexes } from '../models/todo';
+import { getUser } from '../../utilities/users-service'
 
-function App() {
-    const [user, setUser] = useState(getUser())
-    
-    return (
-        <>
-         <main className="App">
-      {
-        user ?
-        <>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-          </Routes>
-        </>
-         :
-        <AuthPage setUser={setUser}/>
-      }
-    </main>
-              
-        </>
-    )
+import MainPage from '../MainPage/MainPage'
+import AuthPage from '../AuthPage/AuthPage'
+
+function App () {
+  const [user, setUser] = useState(getUser())
+  
+  return (
+    <>
+      <main className='App'>
+        {
+          user ? 
+            <>
+              <Routes>
+                <Route path='/' element={<MainPage />} />
+              </Routes>
+            </> : 
+          <AuthPage setUser={setUser} />
+        }
+      </main>
+    </>
+  )
 }
 
-export default App;
+export default App
