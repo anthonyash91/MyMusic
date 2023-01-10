@@ -48,11 +48,27 @@ const albumsDataController = {
         next()
       }
     })
+  },
+  show (req, res, next) {
+    Album.findById(req.params.id, (err, foundAlbum) => {
+      if (err) {
+        res.status(404).send({
+          msg: err.message,
+          output: 'Could not find a album with that ID'
+        })
+      } else {
+        res.locals.data.album = foundAlbum
+        next()
+      }
+    })
   }
 }
 
 const albumsApiController = {
   index (req, res, next) {
+    res.json(res.locals.data.albums)
+  },
+  show (req, res, next) {
     res.json(res.locals.data.albums)
   }
 }

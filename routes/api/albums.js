@@ -6,5 +6,6 @@ router.get('/', albumsDataController.index, albumsApiController.index)
 router.delete('/:id', albumsDataController.destroy, albumsApiController.show)
 router.put('/:id', albumsDataController.update, albumsApiController.show)
 router.post('/', albumsDataController.create, albumsApiController.show)
+router.get('/:id', albumsDataController.show, albumsApiController.show)
 
 module.exports = router
