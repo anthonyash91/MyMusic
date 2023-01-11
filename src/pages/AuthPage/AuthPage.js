@@ -1,13 +1,13 @@
 import SignUpForm from "../../components/SignUpForm/SignupForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { useState, useEffect } from "react";
-import "./AuthPage.module.css";
+// import "./AuthPage.module.css";
 
 export default function AuthPage(props) {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "f69da9c64dmsh1ab6d13d3f922b6p1b8ba9jsn2308ad310454",
+      "X-RapidAPI-Key": `${process.env.REACT_APP_SPOTIFY_API_KEY}`,
       "X-RapidAPI-Host": "billboard3.p.rapidapi.com",
     },
   };

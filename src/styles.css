@@ -739,8 +739,8 @@ a {
   filter: blur(10px) grayscale(20%);
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: -150px;
-  width: 3000px;
+  margin-top: -160px;
+  width: 2000px;
 }
 
 .auth-album {
@@ -749,10 +749,10 @@ a {
   background-color: #aaa;
   background-size: cover;
   border-radius: var(--border-radius);
-  box-shadow: 4px 4px 10px rgba(22,20,19,.05);
-  height: 182px;
-  margin: 40px;
-  width: 182px;
+  /* box-shadow: 4px 4px 10px rgba(22,20,19,.05); */
+  height: 120px;
+  margin: 30px;
+  width: 120px;
 }
 
 /* .auth-album:nth-child(1n) {
