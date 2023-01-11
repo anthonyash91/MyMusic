@@ -654,5 +654,46 @@ a {
 #liked-tracklist {
   max-height: 700px;
   overflow: auto;
- padding: 0 15px 30px 15px; 
+  padding: 0 15px 30px 15px; 
+}
+
+#search-container {
+  height: 600px;
+  margin-top: 30px;
+  overflow: auto;
+}
+
+#search-container input {
+  background-color: transparent;
+  border: 1px solid var(--body-background-color);
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  font: bold 18px/26px 'Helvetica Neue', sans-serif;
+  margin: 0 30px 30px 30px;
+  padding: 16px 0;
+  text-align: center;
+  width: calc(100% - 60px);
+}
+
+#search-container input:focus {
+  outline: none;
+}
+
+#search-container input::placeholder {
+  color: var(--text-color);
+  opacity: .5;
+}
+
+#default-search-results {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 15px 0 15px;
+}
+
+.faux-search-result {
+  background-color: var(--container-background-color);
+  border-radius: var(--border-radius);
+  height: 172px;
+  margin: 0 15px 30px 15px;
+  width: 172px;
 }
