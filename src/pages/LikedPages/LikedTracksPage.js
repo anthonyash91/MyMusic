@@ -41,16 +41,7 @@ export default function LikedTracksPage({
                       style={{ backgroundImage: "url(" + albumArt + ")" }}
                     ></div>
                     <div className="track-title">
-                      <b>
-                        <Link
-                          to={`/track/${trackId}`}
-                          onClick={() => {
-                            clearData();
-                          }}
-                        >
-                          {trackTitle}
-                        </Link>
-                      </b>
+                      <b>{trackTitle}</b>
 
                       {albumArtists.length ? (
                         <div>

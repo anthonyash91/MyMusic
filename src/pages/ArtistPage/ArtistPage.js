@@ -499,17 +499,13 @@ export default function ArtistPage({
                   return (
                     <div className="discography-album" key={i}>
                       {album.coverArt && album.coverArt.sources.length ? (
-                        <Link
-                          to={`/track/${uri.slice(-22)}`}
-                          onClick={() => {
-                            clearData();
-                          }}
+                        <div
                           className="discography-album-cover"
                           style={{
                             backgroundImage:
                               "url(" + album.coverArt.sources[0].url + ")",
                           }}
-                        ></Link>
+                        />
                       ) : (
                         ""
                       )}

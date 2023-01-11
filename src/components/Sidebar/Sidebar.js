@@ -34,7 +34,7 @@ export default function Sidebar({ setUser, currentPage }) {
               <path d="M4 16h2v-8.439l-2 2z"></path>
               <path d="M1 12.561v3.439h2v-5.439z"></path>
             </svg>
-            <Link to="/charts">Charts</Link>
+            <Link to="/">Charts</Link>
           </li>
         </ul>
 

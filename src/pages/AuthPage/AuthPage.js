@@ -1,6 +1,7 @@
 import SignUpForm from "../../components/SignUpForm/SignupForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { useState, useEffect } from "react";
+import "./AuthPage.module.css";
 
 export default function AuthPage(props) {
   const options = {
@@ -47,7 +48,7 @@ export default function AuthPage(props) {
                 setShowForm("Login");
               }}
             >
-              <b>Login</b>
+              <b> Login</b>
             </span>
             .
           </>
@@ -60,129 +61,26 @@ export default function AuthPage(props) {
                 setShowForm("Sign Up");
               }}
             >
-              <b>Signup</b>
+              <b> Signup</b>
             </span>
             .
           </>
         )}
       </div>
       <div id="auth-page-container">
-        {billboard.length ? (
-          billboard.map((cover, i) => {
-            return (
-              <div
-                className="auth-album"
-                style={{
-                  backgroundImage: "url(" + cover.image + ")",
-                }}
-                key={i}
-              ></div>
-            );
-          })
-        ) : (
-          <div id="auth-page-container">
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-            <div className="auth-album"></div>
-          </div>
-        )}
+        {billboard.length
+          ? billboard.map((cover, i) => {
+              return (
+                <div
+                  className="auth-album"
+                  style={{
+                    backgroundImage: "url(" + cover.image + ")",
+                  }}
+                  key={i}
+                ></div>
+              );
+            })
+          : ""}
       </div>
     </>
   );

@@ -6,9 +6,7 @@ import AuthPage from "../AuthPage/AuthPage";
 import Library from "../Library/Library";
 import Search from "../Search/Search";
 import AlbumPage from "../AlbumPage/AlbumPage";
-import TrackPage from "../TrackPage/TrackPage";
 import ArtistPage from "../ArtistPage/ArtistPage";
-import PlaylistPage from "../PlaylistPage/PlaylistPage";
 import LikedTracksPage from "../LikedPages/LikedTracksPage";
 import LikedAlbumsPage from "../LikedPages/LikedAlbumsPage";
 import Sidebar from "../../components/Sidebar/Sidebar";
@@ -217,6 +215,8 @@ function App() {
           />
 
           <div id="content">
+            <div id="top-gradient"></div>
+            <div id="bottom-gradient" />
             <Header currentPage={currentPage} />
 
             <Routes>
@@ -287,26 +287,6 @@ function App() {
               />
 
               <Route
-                path="/track/:spotifyId"
-                element={
-                  <TrackPage
-                    user={user}
-                    newAlbum={newAlbum}
-                    setNewAlbum={setNewAlbum}
-                    trackInfo={trackInfo}
-                    setTrackInfo={setTrackInfo}
-                    albumLibrary={albumLibrary}
-                    setCurrentPage={setCurrentPage}
-                    spotifyOptions={spotifyOptions}
-                    scraperOptions={scraperOptions}
-                    convertTime={convertTime}
-                    clearData={clearData}
-                    create={create}
-                  />
-                }
-              />
-
-              <Route
                 path="/artist/:spotifyId"
                 element={
                   <ArtistPage
@@ -315,20 +295,6 @@ function App() {
                     setArtistInfo={setArtistInfo}
                     setCurrentPage={setCurrentPage}
                     spotifyOptions={spotifyOptions}
-                    clearData={clearData}
-                  />
-                }
-              />
-
-              <Route
-                path="/playlist/:spotifyId"
-                element={
-                  <PlaylistPage
-                    playlistInfo={playlistInfo}
-                    setplaylistInfo={setplaylistInfo}
-                    setCurrentPage={setCurrentPage}
-                    spotifyOptions={spotifyOptions}
-                    convertTime={convertTime}
                     clearData={clearData}
                   />
                 }

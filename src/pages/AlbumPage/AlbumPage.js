@@ -174,7 +174,8 @@ export default function AlbumPage({
                   <form onSubmit={create}>
                     <input
                       type="submit"
-                      value={`Add ${albumInfo.albums[0].name} to your Library`}
+                      value={`Add "${albumInfo.albums[0].name}" to your Library`}
+                      className="add-new-album"
                       onClick={() => {
                         const createAlbumArtists = () => {
                           return albumInfo.albums[0].artists.map(
@@ -224,14 +225,9 @@ export default function AlbumPage({
                 <div className="track" key={i}>
                   <div className="track-info">
                     <div className="track-title">
-                      <Link
-                        to={`/track/${id}`}
-                        onClick={() => {
-                          clearData();
-                        }}
-                      >
+                      <b>
                         #{i + 1} {name}
-                      </Link>
+                      </b>
 
                       <div>
                         {artists.map((artist, i) => {
