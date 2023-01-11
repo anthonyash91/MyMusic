@@ -23,6 +23,7 @@ body {
   font: normal 14px/22px 'Helvetica Neue', sans-serif;
   height: 100vh;
   justify-content: center;
+  overflow: hidden;
 }
 
 #root {
@@ -36,6 +37,7 @@ body {
   box-shadow: 0 0 170px 0 rgba(0,0,0,.1);
   display: flex;
   justify-content: space-between;
+  min-height: 900px;
   max-width: 1060px;
   min-width: 1060px;
 }
@@ -165,7 +167,7 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   /* gap: 30px; */
-  max-height: 771px;
+  max-height: 827px;
   overflow: auto;
   padding: 30px 15px 0 15px;
 }
@@ -226,6 +228,18 @@ body {
   transition: opacity .4s;
 }
 
+.search-container .album-buttons,
+.liked-albums .album-buttons {
+  opacity: 1;
+}
+
+.album-buttons button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+}
+
 .album:hover .album-buttons {
   opacity: 1;
 }
@@ -247,8 +261,11 @@ body {
 }
 
 .album-buttons .info.button:hover ~ .info.button-caption,
+.album-buttons .info.button:hover ~ .info-search.button-caption,
 .album-buttons .favorite.button:hover ~ .favorite.button-caption,
-.album-buttons .remove.button:hover ~ .remove.button-caption {
+.album-buttons .remove.button:hover ~ .remove.button-caption,
+.album-buttons .add.button:hover ~ .add.button-caption,
+.album-buttons .added.button:hover ~ .added.button-caption {
   opacity: 1;
   top: -44px;
 }
@@ -269,6 +286,10 @@ body {
   left: 19px;
 }
 
+.album-buttons .info-search.button-caption::before {
+  left: 37px;
+}
+
 .album-buttons .favorite.button-caption::before {
   left: 50%;
   transform: translateX(-50%);
@@ -276,6 +297,14 @@ body {
 
 .album-buttons .remove.button-caption::before {
   right: 27px;
+}
+
+.album-buttons .add.button-caption::before {
+  right: 40px;
+}
+
+.album-buttons .added.button-caption::before {
+  right: 47px;
 }
 
 .album .album-buttons .button {
@@ -292,16 +321,13 @@ body {
   width: 30px;
 }
 
-.album:hover .album-buttons .button {
-  transform: scale(1);
-}
-
 .album-buttons .info.button:hover {
   background-color: var(--text-color);
 }
 
 .album-buttons .favorite.button:hover,
-.album-buttons .favorite.button.active {
+.album-buttons .favorite.button.active,
+.liked-albums .album-buttons .favorite.button {
   background-color: goldenrod;
 }
 
@@ -309,8 +335,17 @@ body {
   background-color: crimson;
 }
 
+.album-buttons .add.button:hover,
+.album-buttons .added.button {
+  background-color: forestgreen;
+}
+
 .album .album-buttons .favorite.button {
-  padding-bottom: 1px;
+  padding-bottom: 2px;
+}
+
+.album .album-buttons .add.button {
+  padding-top: 6px;
 }
 
 .album .album-buttons svg {
@@ -344,7 +379,7 @@ body {
 /* album page */
 
 #album-content {
-  max-height: 771px;
+  max-height: 827px;
   overflow: auto;
   padding: 30px 15px 30px 15px;
 }
@@ -510,7 +545,7 @@ audio::-webkit-media-controls-enclosure {
 }
 
 #artist-content {
-  max-height: 701px;
+  max-height: 827px;
   overflow: auto;
   padding: 0 15px 30px 15px;
 }
@@ -604,7 +639,7 @@ a {
 
 #discography-menu span {
   background-color: var(--text-color);
-  border-radius: 99px;
+  border-radius: 4px;
   color: var(--container-background-color);
   cursor: pointer;
   font-weight: bold;
@@ -652,39 +687,36 @@ a {
 }
 
 #liked-tracklist {
-  max-height: 700px;
+  max-height: 827px;
   overflow: auto;
   padding: 0 15px 30px 15px; 
 }
 
-#search-container {
-  height: 600px;
-  margin-top: 30px;
-  overflow: auto;
-}
 
-#search-container input {
+
+.search-field {
   background-color: transparent;
   border: 1px solid var(--body-background-color);
   border-radius: var(--border-radius);
   color: var(--text-color);
   font: bold 18px/26px 'Helvetica Neue', sans-serif;
-  margin: 0 30px 30px 30px;
+  margin: 0 15px 30px 15px;
   padding: 16px 0;
   text-align: center;
-  width: calc(100% - 60px);
+  width: 775px;
 }
 
-#search-container input:focus {
+.search-container input:focus {
   outline: none;
 }
 
-#search-container input::placeholder {
+.search-container input::placeholder {
   color: var(--text-color);
   opacity: .5;
 }
 
 #default-search-results {
+  background: red;
   display: flex;
   flex-wrap: wrap;
   margin: 0 15px 0 15px;
@@ -696,4 +728,142 @@ a {
   height: 172px;
   margin: 0 15px 30px 15px;
   width: 172px;
+}
+
+#auth-page-container {
+  display: flex;
+  filter: blur(10px) grayscale(20%);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: -150px;
+  width: 3000px;
+}
+
+.auth-album {
+  /* animation: bounce 1.6s infinite; */
+  background-color: #aaa;
+  background-size: cover;
+  border-radius: var(--border-radius);
+  box-shadow: 4px 4px 10px rgba(22,20,19,.05);
+  height: 182px;
+  margin: 40px;
+  width: 182px;
+}
+
+/* .auth-album:nth-child(1n) {
+  animation: bounce 1.8s infinite;
+} */
+
+.auth-album:nth-child(1n) {
+  animation: bounce 3.8s infinite;
+}
+
+.auth-album:nth-child(2n) {
+  animation: bounce 3.4s infinite;
+}
+
+.auth-album:nth-child(3n) {
+  animation: bounce 1.8s infinite;
+}
+
+.auth-album:nth-child(4n) {
+  animation: bounce 2.2s infinite;
+}
+
+.auth-album:nth-child(5n) {
+  animation: bounce 2.6s infinite;
+}
+
+.auth-album:nth-child(6n) {
+  animation: bounce 3.0s infinite;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+#auth-page {
+  background-color: rgba(0,0,0,.4);
+  border-radius: var(--border-radius);
+  /* box-shadow: 4px 4px 10px rgba(22,20,19,.05); */
+  color: var(--inner-container-background-color);
+  font-size: 16px;
+  left: 50%;
+  padding: 50px 50px 40px 50px;
+  position: absolute;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.1);
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 500px;
+  z-index: 9;
+}
+
+#auth-page b {
+  cursor: pointer;
+}
+
+#auth-page input {
+  background-color: var(--inner-container-background-color);
+  /* border: 1px solid var(--container-background-color); */
+  border: none;
+  border-radius: 4px;
+  color: var(--text-color);
+  display: block;
+  font: bold 18px/18px 'Helvetica Neue', sans-serif;
+  margin-bottom: 15px;
+  padding: 15px 15px;
+  width: 100%;
+}
+
+#auth-page input::placeholder {
+  color: var(--text-color);
+  opacity: .5;
+}
+
+#auth-page input:focus {
+  outline: none;
+}
+
+#auth-page button {
+  background-color: var(--text-color);
+  border: none;
+  border-radius: 4px;
+  color: var(--inner-container-background-color);
+  font: bold 18px/18px 'Helvetica Neue', sans-serif;
+  margin-bottom: 30px;
+  padding: 15px 15px;
+  transition: .2s;
+}
+
+button:disabled {
+  opacity: .5;
+}
+
+#auth-page h1 {
+  color: var(--inner-container-background-color);
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.1);
+}
+
+#error {
+  align-items: center;
+  display: flex;
+}
+.error-message {
+  color: var(--inner-container-background-color);
+  display: block;
+  font-weight: bold;
+  height: 22px;
+  margin-left: 20px;
+  margin-top: -28px;
 }

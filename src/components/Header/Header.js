@@ -1,7 +1,7 @@
-export default function Header({ currentPageHeader }) {
+export default function Header({ currentPage }) {
   return (
     <div id="header">
-      <div id="current-page">My Library</div>
+      <div id="current-page">{currentPage}</div>
 
       <div id="user-info">
         Anthony

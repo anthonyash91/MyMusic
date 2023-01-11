@@ -66,7 +66,7 @@ export default function Sidebar({ setUser, currentPage }) {
             </svg>
             <Link to="/likes/liked-tracks">Liked Tracks</Link>
           </li>
-          <li className={currentPage === "Liked Albums" ? "active" : ""}>
+          <li className={currentPage === "Favorite Albums" ? "active" : ""}>
             <svg
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"

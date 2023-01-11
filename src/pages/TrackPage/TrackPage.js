@@ -12,7 +12,7 @@ export default function TrackPage({
   scraperOptions,
   convertTime,
   clearData,
-  create
+  create,
 }) {
   const [trackCredits, setTrackCredits] = useState([]);
   const [trackLyrics, setTrackLyrics] = useState([]);
@@ -66,24 +66,28 @@ export default function TrackPage({
 
   return (
     <>
-      {trackInfo.tracks ? 
+      {trackInfo.tracks ? (
         <>
           <img
             src={trackInfo.tracks[0].album.images[0].url}
             alt={trackInfo.tracks[0].name}
           />
           <br />
-          <Link to={`/album/${trackInfo.tracks[0].album.id}`}>{trackInfo.tracks[0].album.name}</Link>
+          <Link to={`/album/${trackInfo.tracks[0].album.id}`}>
+            {trackInfo.tracks[0].album.name}
+          </Link>
           <br />
           {trackInfo.tracks[0].name}
+          {trackInfo.tracks[0].type}
           <br />
           {convertTime(trackInfo.tracks[0].duration_ms)}
           <br />
-          {artists && artists.artists ? 
+          {artists && artists.artists ? (
             <>Play count: {artists.playCount.toLocaleString()}</>
-           : ""
-          }
-          {artists.artists ? 
+          ) : (
+            ""
+          )}
+          {artists.artists ? (
             <>
               {artists.artists.map((artist, i) => {
                 const { name, id, visuals } = artist;
@@ -100,9 +104,9 @@ export default function TrackPage({
                 );
               })}
             </>
-           : 
+          ) : (
             ""
-          }
+          )}
 
           <br />
           <audio controls>
@@ -110,9 +114,16 @@ export default function TrackPage({
           </audio>
           <br />
           {albumLibrary.some(
-            (track) => track.trackId === trackInfo.tracks[0].id && track.musicType === 'track'
-          ) ? <>&hearts;<br /></> :  
-          <form onSubmit={create}>
+            (track) =>
+              track.trackId === trackInfo.tracks[0].id &&
+              track.musicType === "track"
+          ) ? (
+            <>
+              &hearts;
+              <br />
+            </>
+          ) : (
+            <form onSubmit={create}>
               <input
                 type="submit"
                 value="♡"
@@ -121,10 +132,10 @@ export default function TrackPage({
                     return trackInfo.tracks[0].artists.map((artist, i) => {
                       return {
                         artistName: trackInfo.tracks[0].artists[i].name,
-                        artistId: trackInfo.tracks[0].artists[i].id
-                      }
-                    })
-                  }
+                        artistId: trackInfo.tracks[0].artists[i].id,
+                      };
+                    });
+                  };
 
                   setNewAlbum({
                     ...newAlbum,
@@ -139,12 +150,12 @@ export default function TrackPage({
                     previewUrl: trackInfo.tracks[0].preview_url,
                     playlist: "",
                     favoriteAlbum: false,
-                    trackDuration: convertTime(trackInfo.tracks[0].duration_ms)
+                    trackDuration: convertTime(trackInfo.tracks[0].duration_ms),
                   });
                 }}
               />
             </form>
-          }
+          )}
 
           <br />
           <br />
@@ -157,7 +168,7 @@ export default function TrackPage({
           >
             Show lyrics
           </button>
-          {trackLyrics.lyrics && trackLyrics.lyrics.lines.length ? 
+          {trackLyrics.lyrics && trackLyrics.lyrics.lines.length ? (
             <>
               <h3>Lyrics</h3>
               {trackLyrics.lyrics.lines.map((line, i) => {
@@ -165,13 +176,13 @@ export default function TrackPage({
                 return <div key={i}>{words}</div>;
               })}
             </>
-           : 
+          ) : (
             ""
-          }
+          )}
         </>
-       : 
+      ) : (
         ""
-      }
+      )}
     </>
   );
 }

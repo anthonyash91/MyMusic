@@ -35,12 +35,12 @@ export default function LikedTracksPage({
               } = album;
               return (
                 <div className="track" key={i}>
-                  <div class="track-info">
+                  <div className="track-info">
                     <div
-                      class="song-cover"
+                      className="song-cover"
                       style={{ backgroundImage: "url(" + albumArt + ")" }}
                     ></div>
-                    <div class="track-title">
+                    <div className="track-title">
                       <b>
                         <Link
                           to={`/track/${trackId}`}
@@ -80,10 +80,10 @@ export default function LikedTracksPage({
 
                   {/* <Link to={`/album/${albumId}`} onClick={() => {clearData()}}>{albumTitle}</Link> */}
 
-                  <div class="track-info">
+                  <div className="track-info">
                     {shortenNum(trackPlayCount)} plays
                   </div>
-                  <div class="track-info like-track">
+                  <div className="track-info like-track">
                     <button
                       onClick={() => {
                         remove(_id);
@@ -100,10 +100,10 @@ export default function LikedTracksPage({
                       </svg>
                     </button>
                   </div>
-                  <div class="track-info">{trackDuration}</div>
+                  <div className="track-info">{trackDuration}</div>
 
-                  <div class="track-info">
-                    <div class="audio-player">
+                  <div className="track-info">
+                    <div className="audio-player">
                       <audio controls>
                         <source src={previewUrl} type="audio/mpeg" />
                       </audio>

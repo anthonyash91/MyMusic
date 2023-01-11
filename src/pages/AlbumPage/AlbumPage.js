@@ -73,7 +73,7 @@ export default function AlbumPage({
         <>
           <div id="album-info">
             <div
-              class="album album-cover"
+              className="album album-cover"
               style={{
                 backgroundImage:
                   "url(" + albumInfo.albums[0].images[0].url + ")",
@@ -222,8 +222,8 @@ export default function AlbumPage({
               } = track;
               return (
                 <div className="track" key={i}>
-                  <div class="track-info">
-                    <div class="track-title">
+                  <div className="track-info">
+                    <div className="track-title">
                       <Link
                         to={`/track/${id}`}
                         onClick={() => {
@@ -248,10 +248,10 @@ export default function AlbumPage({
                       </div>
                     </div>
                   </div>
-                  <div class="track-info">
+                  <div className="track-info">
                     {shortenNum(trackPlayCount.tracks.items[i].playCount)} plays
                   </div>
-                  <div class="track-info like-track">
+                  <div className="track-info like-track">
                     {albumLibrary.some(
                       (track) =>
                         track.trackId === id && track.musicType === "track"
@@ -312,9 +312,9 @@ export default function AlbumPage({
                       </form>
                     )}
                   </div>
-                  <div class="track-info">{convertTime(duration_ms)}</div>
-                  <div class="track-info">
-                    <div class="audio-player">
+                  <div className="track-info">{convertTime(duration_ms)}</div>
+                  <div className="track-info">
+                    <div className="audio-player">
                       <audio controls>
                         <source src={preview_url} type="audio/mpeg" />
                       </audio>
