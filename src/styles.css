@@ -739,8 +739,9 @@ a {
   filter: blur(10px) grayscale(20%);
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: -160px;
-  width: 2000px;
+  margin-left: -100px;
+  margin-top: -90px;
+  width: 110%;
 }
 
 .auth-album {
