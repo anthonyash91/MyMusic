@@ -5,6 +5,11 @@ MyMusic allows you to create your own music library using the Spotify API to pul
 [Trello](https://trello.com/b/0njPDHwv/music-app-unit-3-project)
 [Deployed Application](https://aa-mymusic.herokuapp.com/)
 
+## Low-Fidelity Wire Frames
+
+![library page](https://i.imgur.com/uF1Wu0J.png)
+![album page](https://i.imgur.com/pd5NYRg.png)
+
 ## Login Page
 
 The Login page utilizes a Billboard.com API that displays the top 100 albums from a random day between the years of 2000 and 2022 for the background. Each time the page is refreshed, a new top 100 albums from a random day will appear.
