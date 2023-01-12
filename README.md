@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+## MyMusic - Spotify-based Music Library App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MyMusic allows you to create your own music library using the Spotify API to pull music data.
 
-## Available Scripts
+[Trello](https://trello.com/b/0njPDHwv/music-app-unit-3-project)
+[Deployed Application](https://aa-mymusic.herokuapp.com/)
 
-In the project directory, you can run:
+## Login Page
 
-### `npm start`
+The Login page utilizes a Billboard.com API that displays the top 100 albums from a random day between the years of 2000 and 2022 for the background. Each time the page is refreshed, a new top 100 albums from a random day will appear.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![login page](https://i.imgur.com/kqZPs8W.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## User Library
 
-### `npm test`
+The user's library displays a collection of albums the users added to their database (MongoDB) from the Spotify API on the Explore page. Users can delete albums from their library, view the album information page, and add an album to their favorites.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![user library](https://i.imgur.com/NeAiOXq.png)
 
-### `npm run build`
+## Album Information Page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The album information page makes a call to the Spotify API to pull data about a specific album. Users can add individual songs to their "Liked Tracks" page from here.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![album page](https://i.imgur.com/7HALyVJ.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Liked Tracks Page
 
-### `npm run eject`
+Users can see their liked tracks on this page. To added new "liked" tracks, visit an album page and like tracks from the tracklist that shows.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![liked page](https://i.imgur.com/nQMs7Oj.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Favorites Page
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Users can add albums they've added to their Library to their favorites to keep track of which albums they love the most.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![favorite albums](https://i.imgur.com/HZPOoiV.png)
 
-## Learn More
+## Explore Page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Search for and add albums to your Library from the Search page. This makes a call to the Spotify API so show album results.
+![Explore Page](https://i.imgur.com/o5NUsft.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Artist Page
 
-### Code Splitting
+The artist page calls the Spotify API to show an individual artist's popular releases, albums, singles & EPs, and top tracks.
+![artists](https://i.imgur.com/UAZnnk9.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Favorite Part of My App
 
-### Analyzing the Bundle Size
+Because most of the data showing in this app is being pulled from the Spotify API, I had to find a way to determine if an album is already in my MongoDB. I used the some() method to check the musicIds of my posts and compare them to Spotify API's spotify Ids. If they match, that means the album is already in my library.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+{
+	albumLibrary.some(
+		(album) =>
+		album.albumId === id && album.musicType === "album"
+	) ?
+		"This album is in your library." :
+		"This album is not in your library."
+}
+```
 
-### Making a Progressive Web App
+## Resources
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[Billboard API](https://rapidapi.com/apimaker/api/billboard2/) || [Spotify Scraper API](https://rapidapi.com/DataFanatic/api/spotify-scraper/) || [Spotify API](https://rapidapi.com/Glavier/api/spotify23/)
 
-### Advanced Configuration
+## Things to Add
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+I plan on improving this app for my capstone in the following ways:
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Add an Artists page that shows all of the artists in your library.
+- Add “this artist is in your library” on artist page
+- Be able to delete an album or remove from favorites from album and track pages (need to figure out how to iterate through DB and pull post ID by comparing Spotify id)
+- Add a "Recently Played" page that shows a user's most recently played songs from their Spotify profile.
+- Ability to create new playlists and add tracks to them.
+- Add a Playlists page that will display the playlists the user creates.
+- Add the ability for the user to update their name, profile photo, and certain styling on the page.
+- Dark mode option the user can turn on.
+- Add a Charts page that shows the top tracks and albums from Spotify.
+- Attach the user posts to the user model.
