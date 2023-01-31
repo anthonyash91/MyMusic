@@ -57,16 +57,16 @@ function App() {
           albumsData.filter((usersPosts) => usersPosts.userId === user._id)
         );
 
-        let artistDict = {};
-        let filteredArr = [];
+        // let artistDict = {};
+        // let filteredArr = [];
 
-        let albumArtists = albumsData
-          .filter((usersPosts) => usersPosts.userId === user._id)
-          .map((item) => ({
-            artistName: item.albumArtists[0].artistName,
-            artistId: item.albumArtists[0].artistId,
-            albumArt: item.albumArt,
-          }));
+        // let albumArtists = albumsData
+        //   .filter((usersPosts) => usersPosts.userId === user._id)
+        //   .map((item) => ({
+        //     artistName: item.albumArtists[0].artistName,
+        //     artistId: item.albumArtists[0].artistId,
+        //     albumArt: item.albumArt,
+        //   }));
 
         // let likeArtists = likesData
         //   .filter((usersPosts) => usersPosts.userId === user._id)
@@ -76,23 +76,23 @@ function App() {
         //     albumArt: item.albumArt,
         //   }));
 
-        albumArtists.map((artist) => {
-          if (!artistDict.hasOwnProperty(artist.artistName)) {
-            artistDict[artist.artistName] = artist;
-          }
-        });
+        // albumArtists.map((artist) => {
+        //   if (!artistDict.hasOwnProperty(artist.artistName)) {
+        //     artistDict[artist.artistName] = artist;
+        //   }
+        // });
 
-        likeArtists.map((artist) => {
-          if (!artistDict.hasOwnProperty(artist.artistName)) {
-            artistDict[artist.artistName] = artist;
-          }
-        });
+        // likeArtists.map((artist) => {
+        //   if (!artistDict.hasOwnProperty(artist.artistName)) {
+        //     artistDict[artist.artistName] = artist;
+        //   }
+        // });
 
-        for (const [key, value] of Object.entries(artistDict)) {
-          filteredArr.push(value);
-        }
+        // for (const [key, value] of Object.entries(artistDict)) {
+        //   filteredArr.push(value);
+        // }
 
-        setArtistLib([...filteredArr]);
+        // setArtistLib([...filteredArr]);
       } catch (error) {
         console.error(error);
       }
