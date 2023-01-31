@@ -41,19 +41,6 @@ export default function AuthPage(props) {
       <div id="auth-page">
         {showForm === "Sign Up" ? (
           <>
-            <SignUpForm setUser={props.setUser} />
-            Already signed up?
-            <span
-              onClick={() => {
-                setShowForm("Login");
-              }}
-            >
-              <b> Login</b>
-            </span>
-            .
-          </>
-        ) : (
-          <>
             <LoginForm setUser={props.setUser} />
             Are you new?
             <span
@@ -65,6 +52,20 @@ export default function AuthPage(props) {
             </span>
             .
           </>
+        ) : (
+    <>
+            <SignUpForm setUser={props.setUser} />
+            Already signed up?
+            <span
+              onClick={() => {
+                setShowForm("Login");
+              }}
+            >
+              <b> Login</b>
+            </span>
+            .
+          </>
+          
         )}
       </div>
       <div id="auth-page-container">
