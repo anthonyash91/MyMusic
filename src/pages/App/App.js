@@ -68,13 +68,13 @@ function App() {
             albumArt: item.albumArt,
           }));
 
-        let likeArtists = likesData
-          .filter((usersPosts) => usersPosts.userId === user._id)
-          .map((item) => ({
-            artistName: item.albumArtists[0].artistName,
-            artistId: item.albumArtists[0].artistId,
-            albumArt: item.albumArt,
-          }));
+        // let likeArtists = likesData
+        //   .filter((usersPosts) => usersPosts.userId === user._id)
+        //   .map((item) => ({
+        //     artistName: item.albumArtists[0].artistName,
+        //     artistId: item.albumArtists[0].artistId,
+        //     albumArt: item.albumArt,
+        //   }));
 
         albumArtists.map((artist) => {
           if (!artistDict.hasOwnProperty(artist.artistName)) {
