@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Search({
   user,
   newAlbum,
   setNewAlbum,
-  setCurrentAlbumId,
   albumLibrary,
   setCurrentPage,
   create,
@@ -81,10 +80,7 @@ export default function Search({
                     </svg>
                   </Link>
 
-                  {albumLibrary.some(
-                    (album) =>
-                      album.albumId === id && album.musicType === "album"
-                  ) ? (
+                  {albumLibrary.some((album) => album.albumId === id) ? (
                     <div className="added button">
                       <svg
                         version="1.1"
@@ -115,17 +111,11 @@ export default function Search({
                             setNewAlbum({
                               ...newAlbum,
                               albumTitle: name,
-                              trackTitle: "",
                               albumId: id,
-                              trackId: "",
                               albumArtists: createAlbumArtists(),
                               albumArt: cover[0].url,
+                              favorite: false,
                               userId: user._id,
-                              musicType: "album",
-                              previewUrl: "",
-                              playlist: "",
-                              favoriteAlbum: false,
-                              trackDuration: "",
                             });
                           }}
                         >

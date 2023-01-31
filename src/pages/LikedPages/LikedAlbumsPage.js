@@ -15,7 +15,7 @@ export default function LikedAlbumsPage({
     <div id="music-content" className="liked-albums">
       {albumLibrary.length
         ? albumLibrary
-            .filter((fav) => fav.favoriteAlbum === true)
+            .filter((fav) => fav.favorite === true)
             .map((album, i) => {
               const {
                 albumTitle,
@@ -38,7 +38,7 @@ export default function LikedAlbumsPage({
                       <div
                         className="favorite button active"
                         onClick={() => {
-                          update(_id, { favoriteAlbum: "false" });
+                          update(albumId, { favorite: "false" });
                         }}
                       >
                         <svg

@@ -146,26 +146,23 @@ export default function Sidebar({ setUser, currentPage }) {
             </svg>
             Settings
           </li>
-          <li>
-            <Link
-              to="/loggedout"
-              onClick={() => {
-                logOut();
-                setUser("");
-              }}
+          <li
+            onClick={() => {
+              logOut();
+              setUser("");
+            }}
+          >
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
             >
-              <svg
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-              >
-                <path d="M11 13l4.5-4.5-4.5-4.5v3h-7v3h7v3z"></path>
-                <path d="M1 1h11v2h-10v11h10v2h-11c-0.552 0-1-0.448-1-1v-13c0-0.552 0.448-1 1-1z"></path>
-              </svg>
-              Logout
-            </Link>
+              <path d="M11 13l4.5-4.5-4.5-4.5v3h-7v3h7v3z"></path>
+              <path d="M1 1h11v2h-10v11h10v2h-11c-0.552 0-1-0.448-1-1v-13c0-0.552 0.448-1 1-1z"></path>
+            </svg>
+            Logout
           </li>
         </ul>
       </div>

@@ -15,6 +15,7 @@ import Header from "../../components/Header/Header";
 function App() {
   const [user, setUser] = useState(getUser());
   const [newAlbum, setNewAlbum] = useState([]);
+  const [newLike, setNewLike] = useState([]);
 
   const [albumInfo, setAlbumInfo] = useState([]);
   const [artistInfo, setArtistInfo] = useState([]);
@@ -22,6 +23,7 @@ function App() {
   const [playlistInfo, setplaylistInfo] = useState([]);
 
   const [albumLibrary, setAlbumLibrary] = useState([]);
+  const [likesLibrary, setLikesLibrary] = useState([]);
 
   const [currentPage, setCurrentPage] = useState("Library");
 
@@ -45,32 +47,42 @@ function App() {
   };
 
   const [artistLib, setArtistLib] = useState([]);
-  // const [artistArtLib, setArtistArtLib] = useState([])
 
   const getAlbumLibrary = async () => {
     if (user) {
       try {
-        const response = await fetch("/api/albums");
-        const data = await response.json();
+        const albumsResponse = await fetch("/api/albums");
+        const albumsData = await albumsResponse.json();
         setAlbumLibrary(
-          data.filter((usersPosts) => usersPosts.userId === user._id)
+          albumsData.filter((usersPosts) => usersPosts.userId === user._id)
         );
 
         let artistDict = {};
         let filteredArr = [];
 
-        let artists = data
-          .filter(
-            (usersPosts) =>
-              usersPosts.userId === user._id && usersPosts.musicType === "album"
-          )
+        let albumArtists = albumsData
+          .filter((usersPosts) => usersPosts.userId === user._id)
           .map((item) => ({
             artistName: item.albumArtists[0].artistName,
             artistId: item.albumArtists[0].artistId,
             albumArt: item.albumArt,
           }));
 
-        artists.map((artist) => {
+        let likeArtists = likesData
+          .filter((usersPosts) => usersPosts.userId === user._id)
+          .map((item) => ({
+            artistName: item.albumArtists[0].artistName,
+            artistId: item.albumArtists[0].artistId,
+            albumArt: item.albumArt,
+          }));
+
+        albumArtists.map((artist) => {
+          if (!artistDict.hasOwnProperty(artist.artistName)) {
+            artistDict[artist.artistName] = artist;
+          }
+        });
+
+        likeArtists.map((artist) => {
           if (!artistDict.hasOwnProperty(artist.artistName)) {
             artistDict[artist.artistName] = artist;
           }
@@ -123,20 +135,21 @@ function App() {
     if (num < 1000) {
       return num;
     }
-    let si = [
+    let letter = [
       { v: 1e3, s: "k" },
       { v: 1e6, s: "m" },
       { v: 1e9, s: "b" },
     ];
     let index;
-    for (index = si.length - 1; index > 0; index--) {
-      if (num >= si[index].v) {
+    for (index = letter.length - 1; index > 0; index--) {
+      if (num >= letter[index].v) {
         break;
       }
     }
     return (
-      (num / si[index].v).toFixed(1).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, "$1") +
-      si[index].s
+      (num / letter[index].v)
+        .toFixed(1)
+        .replace(/\.0+$|(\.[0-9]*[1-9])0+$/, "$1") + letter[index].s
     );
   };
 
@@ -147,8 +160,6 @@ function App() {
     setTrackInfo([]);
     setplaylistInfo([]);
   };
-
-  const navigate = useNavigate();
 
   const create = async (e) => {
     e.preventDefault(e);
@@ -163,7 +174,6 @@ function App() {
       });
 
       getAlbumLibrary();
-      // navigate('/');
     } catch (error) {
       console.error(error);
     }
@@ -200,6 +210,39 @@ function App() {
     }
   };
 
+  const like = async (e) => {
+    e.preventDefault(e);
+
+    try {
+      await fetch("/api/likes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...newLike }),
+      });
+
+      getAlbumLibrary();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const unlike = async (id) => {
+    try {
+      await fetch(`/api/likes/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      getAlbumLibrary();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getAlbumLibrary();
   }, [user]);
@@ -217,7 +260,7 @@ function App() {
           <div id="content">
             <div id="top-gradient"></div>
             <div id="bottom-gradient" />
-            <Header currentPage={currentPage} />
+            <Header user={user} currentPage={currentPage} />
 
             <Routes>
               <Route
@@ -269,10 +312,13 @@ function App() {
                     user={user}
                     newAlbum={newAlbum}
                     setNewAlbum={setNewAlbum}
+                    newLike={newLike}
+                    setNewLike={setNewLike}
                     albumInfo={albumInfo}
                     setAlbumInfo={setAlbumInfo}
                     getAlbumLibrary={getAlbumLibrary}
                     albumLibrary={albumLibrary}
+                    likesLibrary={likesLibrary}
                     setCurrentPage={setCurrentPage}
                     spotifyOptions={spotifyOptions}
                     scraperOptions={scraperOptions}
@@ -281,7 +327,10 @@ function App() {
                     shortenNum={shortenNum}
                     clearData={clearData}
                     create={create}
+                    update={update}
                     remove={remove}
+                    like={like}
+                    unlike={unlike}
                   />
                 }
               />
@@ -304,12 +353,11 @@ function App() {
                 path="/likes/liked-tracks"
                 element={
                   <LikedTracksPage
-                    albumLibrary={albumLibrary}
+                    likesLibrary={likesLibrary}
                     setCurrentPage={setCurrentPage}
-                    getAlbumLibrary={getAlbumLibrary}
                     shortenNum={shortenNum}
                     clearData={clearData}
-                    remove={remove}
+                    unlike={unlike}
                   />
                 }
               />

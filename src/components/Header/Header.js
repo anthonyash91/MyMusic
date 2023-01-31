@@ -1,10 +1,10 @@
-export default function Header({ currentPage }) {
+export default function Header({ user, currentPage }) {
   return (
     <div id="header">
       <div id="current-page">{currentPage}</div>
 
       <div id="user-info">
-        Anthony
+        {user.name}
         <div
           id="user-avatar"
           style={{

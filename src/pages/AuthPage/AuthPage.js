@@ -53,7 +53,7 @@ export default function AuthPage(props) {
             .
           </>
         ) : (
-    <>
+          <>
             <SignUpForm setUser={props.setUser} />
             Already signed up?
             <span
@@ -65,7 +65,6 @@ export default function AuthPage(props) {
             </span>
             .
           </>
-          
         )}
       </div>
       <div id="auth-page-container">

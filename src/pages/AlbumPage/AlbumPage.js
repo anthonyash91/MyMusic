@@ -5,9 +5,12 @@ export default function AlbumPage({
   user,
   newAlbum,
   setNewAlbum,
+  newLike,
+  setNewLike,
   albumInfo,
   setAlbumInfo,
   albumLibrary,
+  likesLibrary,
   setCurrentPage,
   spotifyOptions,
   scraperOptions,
@@ -15,7 +18,11 @@ export default function AlbumPage({
   msConversion,
   shortenNum,
   clearData,
+  remove,
   create,
+  update,
+  like,
+  unlike,
 }) {
   const [artistAvatar, setArtistAvatar] = useState([]);
   const [trackPlayCount, setTrackPlayCount] = useState([]);
@@ -155,20 +162,40 @@ export default function AlbumPage({
               </div>
 
               <div>
+                <button
+                  onClick={() => {
+                    remove(spotifyId);
+                  }}
+                >
+                  Delete
+                </button>
+
                 {albumLibrary.some(
-                  (album) =>
-                    album.albumId === albumInfo.albums[0].id &&
-                    album.musicType === "album"
+                  (album) => album.albumId === albumInfo.albums[0].id
                 ) ? (
                   <>
                     This album is in your library
                     {albumLibrary.some(
                       (album) =>
                         album.albumId === albumInfo.albums[0].id &&
-                        album.favoriteAlbum === true
+                        album.favorite === true
                     )
                       ? ` and you have it favorited.`
                       : ` and you haven't favorited it.`}
+                    <button
+                      onClick={() => {
+                        update(spotifyId, { favorite: "true" });
+                      }}
+                    >
+                      fave
+                    </button>
+                    <button
+                      onClick={() => {
+                        update(spotifyId, { favorite: "false" });
+                      }}
+                    >
+                      unfave
+                    </button>
                   </>
                 ) : (
                   <form onSubmit={create}>
@@ -191,17 +218,11 @@ export default function AlbumPage({
                         setNewAlbum({
                           ...newAlbum,
                           albumTitle: albumInfo.albums[0].name,
-                          trackTitle: "",
                           albumId: albumInfo.albums[0].id,
-                          trackId: "",
                           albumArtists: createAlbumArtists(),
                           albumArt: albumInfo.albums[0].images[0].url,
+                          favorite: false,
                           userId: user._id,
-                          musicType: "album",
-                          previewUrl: "",
-                          playlist: "",
-                          favoriteAlbum: false,
-                          trackDuration: "",
                         });
                       }}
                     />
@@ -248,21 +269,27 @@ export default function AlbumPage({
                     {shortenNum(trackPlayCount.tracks.items[i].playCount)} plays
                   </div>
                   <div className="track-info like-track">
-                    {albumLibrary.some(
-                      (track) =>
-                        track.trackId === id && track.musicType === "track"
-                    ) ? (
-                      <svg
-                        version="1.1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M11.75 1c-1.624 0-3.034 0.911-3.75 2.249-0.716-1.338-2.126-2.249-3.75-2.249-2.347 0-4.25 1.903-4.25 4.25 0 5.75 8 9.75 8 9.75s8-4 8-9.75c0-2.347-1.903-4.25-4.25-4.25z"></path>
-                      </svg>
+                    {likesLibrary.some((track) => track.trackId === id) ? (
+                      <>
+                        <button
+                          onClick={() => {
+                            unlike(id);
+                          }}
+                          value={id}
+                        >
+                          <svg
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M11.75 1c-1.624 0-3.034 0.911-3.75 2.249-0.716-1.338-2.126-2.249-3.75-2.249-2.347 0-4.25 1.903-4.25 4.25 0 5.75 8 9.75 8 9.75s8-4 8-9.75c0-2.347-1.903-4.25-4.25-4.25z"></path>
+                          </svg>
+                        </button>
+                      </>
                     ) : (
-                      <form onSubmit={create}>
+                      <form onSubmit={like}>
                         <button
                           type="submit"
                           onClick={() => {
@@ -275,23 +302,21 @@ export default function AlbumPage({
                               });
                             };
 
-                            setNewAlbum({
-                              ...newAlbum,
+                            setNewLike({
+                              ...newLike,
                               albumTitle: albumInfo.albums[0].name,
                               trackTitle: name,
                               albumId: albumInfo.albums[0].id,
                               trackId: id,
                               albumArtists: createAlbumArtists(),
                               albumArt: albumInfo.albums[0].images[0].url,
-                              userId: user._id,
-                              musicType: "track",
                               previewUrl: preview_url,
                               playlist: "",
-                              favoriteAlbum: false,
                               trackDuration: convertTime(duration_ms),
                               trackPlayCount: parseInt(
                                 trackPlayCount.tracks.items[i].playCount
                               ),
+                              userId: user._id,
                             });
                           }}
                         >

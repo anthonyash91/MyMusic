@@ -2,12 +2,11 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function LikedTracksPage({
-  albumLibrary,
+  likesLibrary,
   setCurrentPage,
-  getAlbumLibrary,
   shortenNum,
   clearData,
-  remove,
+  unlike,
 }) {
   useEffect(() => {
     // getAlbumLibrary()
@@ -16,10 +15,9 @@ export default function LikedTracksPage({
 
   return (
     <div id="liked-tracklist">
-      {albumLibrary.length ? (
+      {likesLibrary.length ? (
         <div id="album-tracklist">
-          {albumLibrary
-            .filter((type) => type.musicType === "track")
+          {likesLibrary
             .map((album, i) => {
               const {
                 albumTitle,
@@ -77,7 +75,7 @@ export default function LikedTracksPage({
                   <div className="track-info like-track">
                     <button
                       onClick={() => {
-                        remove(_id);
+                        unlike(trackId);
                       }}
                     >
                       <svg

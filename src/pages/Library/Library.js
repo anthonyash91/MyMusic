@@ -16,14 +16,13 @@ export default function Library({
     <div id="music-content">
       {albumLibrary.length
         ? albumLibrary
-            .filter((type) => type.musicType === "album")
             .map((album, i) => {
               const {
                 albumTitle,
                 albumId,
                 albumArtists,
                 albumArt,
-                favoriteAlbum,
+                favorite,
                 _id,
               } = album;
               return (
@@ -45,11 +44,11 @@ export default function Library({
                         </svg>
                       </Link>
 
-                      {favoriteAlbum === true ? (
+                      {favorite === true ? (
                         <div
                           className="favorite button active"
                           onClick={() => {
-                            update(_id, { favoriteAlbum: "false" });
+                            update(albumId, { favorite: "false" });
                           }}
                         >
                           <svg
@@ -66,7 +65,7 @@ export default function Library({
                         <div
                           className="favorite button"
                           onClick={() => {
-                            update(_id, { favoriteAlbum: "true" });
+                            update(albumId, { favorite: "true" });
                           }}
                         >
                           <svg
@@ -84,7 +83,7 @@ export default function Library({
                       <div
                         className="remove button"
                         onClick={() => {
-                          remove(_id);
+                          remove(albumId);
                         }}
                       >
                         <svg
@@ -105,7 +104,7 @@ export default function Library({
                         Remove from Library
                       </div>
 
-                      {favoriteAlbum === true ? (
+                      {favorite === true ? (
                         <div className="favorite button-caption">
                           Remove from Favorites
                         </div>

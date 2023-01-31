@@ -26,9 +26,13 @@ export default function LoginForm({ setUser }) {
   return (
     <div>
       <h1>Login</h1>
-    Login with these credentials:<br />
-    Email: a@a.com<br />
-    Password: 123456<br /><br />
+      Login with these credentials:
+      <br />
+      Email: a@a.com
+      <br />
+      Password: 123456
+      <br />
+      <br />
       <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
           <input
@@ -43,7 +47,7 @@ export default function LoginForm({ setUser }) {
             type="password"
             name="password"
             value={credentials.password}
-=            onChange={handleChange}
+            onChange={handleChange}
             placeholder="Password"
             required
           />
