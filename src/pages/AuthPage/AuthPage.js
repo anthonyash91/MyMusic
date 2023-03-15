@@ -39,7 +39,7 @@ export default function AuthPage(props) {
   return (
     <>
       <div id="auth-page">
-        {showForm === "Sign Up" ? (
+        {showForm === "Login" ? (
           <>
             <LoginForm setUser={props.setUser} />
             Are you new?
